@@ -563,6 +563,15 @@ export interface GetSourcesByCategoryResponse {
     total: number;
 }
 /**
+ * @generated from protobuf message news.GetArticlesByUuidsParams
+ */
+export interface GetArticlesByUuidsParams {
+    /**
+     * @generated from protobuf field: repeated bytes uuids = 1;
+     */
+    uuids: Uint8Array[];
+}
+/**
  * @generated from protobuf message news.GetArticlesByFilterParams
  */
 export interface GetArticlesByFilterParams {
@@ -3018,6 +3027,53 @@ class GetSourcesByCategoryResponse$Type extends MessageType<GetSourcesByCategory
  * @generated MessageType for protobuf message news.GetSourcesByCategoryResponse
  */
 export const GetSourcesByCategoryResponse = new GetSourcesByCategoryResponse$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class GetArticlesByUuidsParams$Type extends MessageType<GetArticlesByUuidsParams> {
+    constructor() {
+        super("news.GetArticlesByUuidsParams", [
+            { no: 1, name: "uuids", kind: "scalar", repeat: 2 /*RepeatType.UNPACKED*/, T: 12 /*ScalarType.BYTES*/ }
+        ]);
+    }
+    create(value?: PartialMessage<GetArticlesByUuidsParams>): GetArticlesByUuidsParams {
+        const message = globalThis.Object.create((this.messagePrototype!));
+        message.uuids = [];
+        if (value !== undefined)
+            reflectionMergePartial<GetArticlesByUuidsParams>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: GetArticlesByUuidsParams): GetArticlesByUuidsParams {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* repeated bytes uuids */ 1:
+                    message.uuids.push(reader.bytes());
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: GetArticlesByUuidsParams, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* repeated bytes uuids = 1; */
+        for (let i = 0; i < message.uuids.length; i++)
+            writer.tag(1, WireType.LengthDelimited).bytes(message.uuids[i]);
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message news.GetArticlesByUuidsParams
+ */
+export const GetArticlesByUuidsParams = new GetArticlesByUuidsParams$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class GetArticlesByFilterParams$Type extends MessageType<GetArticlesByFilterParams> {
     constructor() {
