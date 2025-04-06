@@ -1,0 +1,37 @@
+name: Публикация пакета в GitHub NPM Registry
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Клонирование репозитория
+        uses: actions/checkout@v3
+
+      - name: Настройка Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@${{ github.repository_owner }}'
+
+      - name: Установка зависимостей
+        run: npm ci
+
+      - name: Установка TypeScript глобально
+        run: npm install -g typescript
+
+      - name: Сборка пакета
+        run: npm run build
+
+      - name: Настройка .npmrc для аутентификации
+        run: |
+          echo "@${{ github.repository_owner }}:registry=https://npm.pkg.github.com" > .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.REPO_PACKAGE_TOKEN }}" >> .npmrc
+
+      - name: Публикация пакета
+        run: npm publish
