@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/x3a-tech/account-contract-ts.git"
+    "url": "git+https://github.com/x3a-tech/news-contract-ts.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/x3a-tech/account-contract-ts/issues"
+    "url": "https://github.com/x3a-tech/news-contract-ts/issues"
   },
-  "homepage": "https://github.com/x3a-tech/account-contract-ts#readme",
+  "homepage": "https://github.com/x3a-tech/news-contract-ts#readme",
   "description": "",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
