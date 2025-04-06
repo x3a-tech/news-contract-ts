@@ -1,13 +1,36 @@
 {
   "compilerOptions": {
-    "target": "es2020",
-    "module": "commonjs",
-    "declaration": true,
-    "outDir": "./dist",
-    "rootDir": "./src",
+    "lib": ["ESNext", "DOM"],
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleDetection": "force",
+    "jsx": "react-jsx",
+    "allowJs": true,
+
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": false,
+    "verbatimModuleSyntax": true,
+    "noEmit": false,
+
     "strict": true,
-    "esModuleInterop": true
+    "skipLibCheck": true,
+    "noFallthroughCasesInSwitch": true,
+
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noPropertyAccessFromIndexSignature": false,
+
+    "baseUrl": ".",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "declaration": true,
+    "emitDeclarationOnly": false,
+    "paths": {
+      "./server": ["./contract/server.ts"],
+      "../google/protobuf/empty": ["./contract/google/protobuf/empty.ts"],
+      "../google/protobuf/any": ["./contract/google/protobuf/any.ts"]
+    }
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["node_modules", "dist"]
 }
