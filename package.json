@@ -1,0 +1,34 @@
+{
+  "name": "@x3a-tech/temp-contract-ts",
+  "version": "0.0.1",
+  "private": false,
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "npm run clean && tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/x3a-tech/account-contract-ts.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/x3a-tech/account-contract-ts/issues"
+  },
+  "homepage": "https://github.com/x3a-tech/account-contract-ts#readme",
+  "description": "",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "dependencies": {
+    "@protobuf-ts/runtime": "^2.9.5",
+    "@protobuf-ts/runtime-rpc": "^2.9.4"
+  },
+  "devDependencies": {
+    "rimraf": "^6.0.1",
+    "typescript": "^5.0.0"
+  }
+}
