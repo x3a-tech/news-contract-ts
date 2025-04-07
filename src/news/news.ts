@@ -510,11 +510,7 @@ export interface GetCategoryParams {
  */
 export interface GetSourcesByUuidsParams {
     /**
-     * @generated from protobuf field: int32 lang = 1;
-     */
-    lang: number;
-    /**
-     * @generated from protobuf field: repeated bytes source_uuids = 2;
+     * @generated from protobuf field: repeated bytes source_uuids = 1;
      */
     sourceUuids: Uint8Array[];
 }
@@ -571,7 +567,11 @@ export interface GetSourcesByCategoryResponse {
  */
 export interface GetArticlesByUuidsParams {
     /**
-     * @generated from protobuf field: repeated bytes uuids = 1;
+     * @generated from protobuf field: int32 lang = 1;
+     */
+    lang: number;
+    /**
+     * @generated from protobuf field: repeated bytes uuids = 2;
      */
     uuids: Uint8Array[];
 }
@@ -2776,13 +2776,11 @@ export const GetCategoryParams = new GetCategoryParams$Type();
 class GetSourcesByUuidsParams$Type extends MessageType<GetSourcesByUuidsParams> {
     constructor() {
         super("news.GetSourcesByUuidsParams", [
-            { no: 1, name: "lang", kind: "scalar", T: 5 /*ScalarType.INT32*/ },
-            { no: 2, name: "source_uuids", kind: "scalar", repeat: 2 /*RepeatType.UNPACKED*/, T: 12 /*ScalarType.BYTES*/ }
+            { no: 1, name: "source_uuids", kind: "scalar", repeat: 2 /*RepeatType.UNPACKED*/, T: 12 /*ScalarType.BYTES*/ }
         ]);
     }
     create(value?: PartialMessage<GetSourcesByUuidsParams>): GetSourcesByUuidsParams {
         const message = globalThis.Object.create((this.messagePrototype!));
-        message.lang = 0;
         message.sourceUuids = [];
         if (value !== undefined)
             reflectionMergePartial<GetSourcesByUuidsParams>(this, message, value);
@@ -2793,10 +2791,7 @@ class GetSourcesByUuidsParams$Type extends MessageType<GetSourcesByUuidsParams> 
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* int32 lang */ 1:
-                    message.lang = reader.int32();
-                    break;
-                case /* repeated bytes source_uuids */ 2:
+                case /* repeated bytes source_uuids */ 1:
                     message.sourceUuids.push(reader.bytes());
                     break;
                 default:
@@ -2811,12 +2806,9 @@ class GetSourcesByUuidsParams$Type extends MessageType<GetSourcesByUuidsParams> 
         return message;
     }
     internalBinaryWrite(message: GetSourcesByUuidsParams, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* int32 lang = 1; */
-        if (message.lang !== 0)
-            writer.tag(1, WireType.Varint).int32(message.lang);
-        /* repeated bytes source_uuids = 2; */
+        /* repeated bytes source_uuids = 1; */
         for (let i = 0; i < message.sourceUuids.length; i++)
-            writer.tag(2, WireType.LengthDelimited).bytes(message.sourceUuids[i]);
+            writer.tag(1, WireType.LengthDelimited).bytes(message.sourceUuids[i]);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -3043,11 +3035,13 @@ export const GetSourcesByCategoryResponse = new GetSourcesByCategoryResponse$Typ
 class GetArticlesByUuidsParams$Type extends MessageType<GetArticlesByUuidsParams> {
     constructor() {
         super("news.GetArticlesByUuidsParams", [
-            { no: 1, name: "uuids", kind: "scalar", repeat: 2 /*RepeatType.UNPACKED*/, T: 12 /*ScalarType.BYTES*/ }
+            { no: 1, name: "lang", kind: "scalar", T: 5 /*ScalarType.INT32*/ },
+            { no: 2, name: "uuids", kind: "scalar", repeat: 2 /*RepeatType.UNPACKED*/, T: 12 /*ScalarType.BYTES*/ }
         ]);
     }
     create(value?: PartialMessage<GetArticlesByUuidsParams>): GetArticlesByUuidsParams {
         const message = globalThis.Object.create((this.messagePrototype!));
+        message.lang = 0;
         message.uuids = [];
         if (value !== undefined)
             reflectionMergePartial<GetArticlesByUuidsParams>(this, message, value);
@@ -3058,7 +3052,10 @@ class GetArticlesByUuidsParams$Type extends MessageType<GetArticlesByUuidsParams
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* repeated bytes uuids */ 1:
+                case /* int32 lang */ 1:
+                    message.lang = reader.int32();
+                    break;
+                case /* repeated bytes uuids */ 2:
                     message.uuids.push(reader.bytes());
                     break;
                 default:
@@ -3073,9 +3070,12 @@ class GetArticlesByUuidsParams$Type extends MessageType<GetArticlesByUuidsParams
         return message;
     }
     internalBinaryWrite(message: GetArticlesByUuidsParams, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* repeated bytes uuids = 1; */
+        /* int32 lang = 1; */
+        if (message.lang !== 0)
+            writer.tag(1, WireType.Varint).int32(message.lang);
+        /* repeated bytes uuids = 2; */
         for (let i = 0; i < message.uuids.length; i++)
-            writer.tag(1, WireType.LengthDelimited).bytes(message.uuids[i]);
+            writer.tag(2, WireType.LengthDelimited).bytes(message.uuids[i]);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
