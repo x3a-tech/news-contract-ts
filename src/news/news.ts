@@ -427,13 +427,13 @@ export interface Category {
  */
 export interface CategoryMeta {
     /**
-     * @generated from protobuf field: bytes uuid = 1;
+     * @generated from protobuf field: int32 uuid = 1;
      */
-    uuid: Uint8Array;
+    uuid: number;
     /**
-     * @generated from protobuf field: optional bytes parent_id = 2;
+     * @generated from protobuf field: optional int32 parent_id = 2;
      */
-    parentId?: Uint8Array;
+    parentId?: number;
 }
 /**
  * @generated from protobuf message news.CategoryData
@@ -2409,13 +2409,13 @@ export const Category = new Category$Type();
 class CategoryMeta$Type extends MessageType<CategoryMeta> {
     constructor() {
         super("news.CategoryMeta", [
-            { no: 1, name: "uuid", kind: "scalar", T: 12 /*ScalarType.BYTES*/ },
-            { no: 2, name: "parent_id", kind: "scalar", opt: true, T: 12 /*ScalarType.BYTES*/ }
+            { no: 1, name: "uuid", kind: "scalar", T: 5 /*ScalarType.INT32*/ },
+            { no: 2, name: "parent_id", kind: "scalar", opt: true, T: 5 /*ScalarType.INT32*/ }
         ]);
     }
     create(value?: PartialMessage<CategoryMeta>): CategoryMeta {
         const message = globalThis.Object.create((this.messagePrototype!));
-        message.uuid = new Uint8Array(0);
+        message.uuid = 0;
         if (value !== undefined)
             reflectionMergePartial<CategoryMeta>(this, message, value);
         return message;
@@ -2425,11 +2425,11 @@ class CategoryMeta$Type extends MessageType<CategoryMeta> {
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* bytes uuid */ 1:
-                    message.uuid = reader.bytes();
+                case /* int32 uuid */ 1:
+                    message.uuid = reader.int32();
                     break;
-                case /* optional bytes parent_id */ 2:
-                    message.parentId = reader.bytes();
+                case /* optional int32 parent_id */ 2:
+                    message.parentId = reader.int32();
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -2443,12 +2443,12 @@ class CategoryMeta$Type extends MessageType<CategoryMeta> {
         return message;
     }
     internalBinaryWrite(message: CategoryMeta, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* bytes uuid = 1; */
-        if (message.uuid.length)
-            writer.tag(1, WireType.LengthDelimited).bytes(message.uuid);
-        /* optional bytes parent_id = 2; */
+        /* int32 uuid = 1; */
+        if (message.uuid !== 0)
+            writer.tag(1, WireType.Varint).int32(message.uuid);
+        /* optional int32 parent_id = 2; */
         if (message.parentId !== undefined)
-            writer.tag(2, WireType.LengthDelimited).bytes(message.parentId);
+            writer.tag(2, WireType.Varint).int32(message.parentId);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
