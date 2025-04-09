@@ -856,13 +856,13 @@ export interface UpdateFilterSourcesParams {
      */
     filterUuid: Uint8Array;
     /**
-     * @generated from protobuf field: repeated bytes add_filter_sources = 3;
+     * @generated from protobuf field: repeated news.NewSourceCategory add_filter_sources = 3;
      */
-    addFilterSources: Uint8Array[];
+    addFilterSources: NewSourceCategory[];
     /**
-     * @generated from protobuf field: repeated bytes remove_filter_sources = 4;
+     * @generated from protobuf field: repeated news.NewSourceCategory remove_filter_sources = 4;
      */
-    removeFilterSources: Uint8Array[];
+    removeFilterSources: NewSourceCategory[];
 }
 /**
  * @generated from protobuf message news.RemoveFilterParams
@@ -4091,8 +4091,8 @@ class UpdateFilterSourcesParams$Type extends MessageType<UpdateFilterSourcesPara
         super("news.UpdateFilterSourcesParams", [
             { no: 1, name: "account_uuid", kind: "scalar", T: 12 /*ScalarType.BYTES*/ },
             { no: 2, name: "filter_uuid", kind: "scalar", T: 12 /*ScalarType.BYTES*/ },
-            { no: 3, name: "add_filter_sources", kind: "scalar", repeat: 2 /*RepeatType.UNPACKED*/, T: 12 /*ScalarType.BYTES*/ },
-            { no: 4, name: "remove_filter_sources", kind: "scalar", repeat: 2 /*RepeatType.UNPACKED*/, T: 12 /*ScalarType.BYTES*/ }
+            { no: 3, name: "add_filter_sources", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => NewSourceCategory },
+            { no: 4, name: "remove_filter_sources", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => NewSourceCategory }
         ]);
     }
     create(value?: PartialMessage<UpdateFilterSourcesParams>): UpdateFilterSourcesParams {
@@ -4116,11 +4116,11 @@ class UpdateFilterSourcesParams$Type extends MessageType<UpdateFilterSourcesPara
                 case /* bytes filter_uuid */ 2:
                     message.filterUuid = reader.bytes();
                     break;
-                case /* repeated bytes add_filter_sources */ 3:
-                    message.addFilterSources.push(reader.bytes());
+                case /* repeated news.NewSourceCategory add_filter_sources */ 3:
+                    message.addFilterSources.push(NewSourceCategory.internalBinaryRead(reader, reader.uint32(), options));
                     break;
-                case /* repeated bytes remove_filter_sources */ 4:
-                    message.removeFilterSources.push(reader.bytes());
+                case /* repeated news.NewSourceCategory remove_filter_sources */ 4:
+                    message.removeFilterSources.push(NewSourceCategory.internalBinaryRead(reader, reader.uint32(), options));
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -4140,12 +4140,12 @@ class UpdateFilterSourcesParams$Type extends MessageType<UpdateFilterSourcesPara
         /* bytes filter_uuid = 2; */
         if (message.filterUuid.length)
             writer.tag(2, WireType.LengthDelimited).bytes(message.filterUuid);
-        /* repeated bytes add_filter_sources = 3; */
+        /* repeated news.NewSourceCategory add_filter_sources = 3; */
         for (let i = 0; i < message.addFilterSources.length; i++)
-            writer.tag(3, WireType.LengthDelimited).bytes(message.addFilterSources[i]);
-        /* repeated bytes remove_filter_sources = 4; */
+            NewSourceCategory.internalBinaryWrite(message.addFilterSources[i], writer.tag(3, WireType.LengthDelimited).fork(), options).join();
+        /* repeated news.NewSourceCategory remove_filter_sources = 4; */
         for (let i = 0; i < message.removeFilterSources.length; i++)
-            writer.tag(4, WireType.LengthDelimited).bytes(message.removeFilterSources[i]);
+            NewSourceCategory.internalBinaryWrite(message.removeFilterSources[i], writer.tag(4, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
