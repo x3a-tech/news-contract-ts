@@ -554,9 +554,9 @@ export interface GetSourcesByCategoryParams {
  */
 export interface GetSourcesByCategoryResponse {
     /**
-     * @generated from protobuf field: repeated news.Source sources = 1;
+     * @generated from protobuf field: repeated bytes sources = 1;
      */
-    sources: Source[];
+    sources: Uint8Array[];
     /**
      * @generated from protobuf field: int32 total = 2;
      */
@@ -2980,7 +2980,7 @@ export const GetSourcesByCategoryParams = new GetSourcesByCategoryParams$Type();
 class GetSourcesByCategoryResponse$Type extends MessageType<GetSourcesByCategoryResponse> {
     constructor() {
         super("news.GetSourcesByCategoryResponse", [
-            { no: 1, name: "sources", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => Source },
+            { no: 1, name: "sources", kind: "scalar", repeat: 2 /*RepeatType.UNPACKED*/, T: 12 /*ScalarType.BYTES*/ },
             { no: 2, name: "total", kind: "scalar", T: 5 /*ScalarType.INT32*/ }
         ]);
     }
@@ -2997,8 +2997,8 @@ class GetSourcesByCategoryResponse$Type extends MessageType<GetSourcesByCategory
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* repeated news.Source sources */ 1:
-                    message.sources.push(Source.internalBinaryRead(reader, reader.uint32(), options));
+                case /* repeated bytes sources */ 1:
+                    message.sources.push(reader.bytes());
                     break;
                 case /* int32 total */ 2:
                     message.total = reader.int32();
@@ -3015,9 +3015,9 @@ class GetSourcesByCategoryResponse$Type extends MessageType<GetSourcesByCategory
         return message;
     }
     internalBinaryWrite(message: GetSourcesByCategoryResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* repeated news.Source sources = 1; */
+        /* repeated bytes sources = 1; */
         for (let i = 0; i < message.sources.length; i++)
-            Source.internalBinaryWrite(message.sources[i], writer.tag(1, WireType.LengthDelimited).fork(), options).join();
+            writer.tag(1, WireType.LengthDelimited).bytes(message.sources[i]);
         /* int32 total = 2; */
         if (message.total !== 0)
             writer.tag(2, WireType.Varint).int32(message.total);
